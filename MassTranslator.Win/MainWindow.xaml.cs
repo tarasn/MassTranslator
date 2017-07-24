@@ -23,6 +23,15 @@ namespace MassTranslator.Win
         public MainWindow()
         {
             InitializeComponent();
+            var viewModel = Composite();
+            this.DataContext = viewModel;
+        }
+
+        private static TranslatorViewModel Composite()
+        {
+            var model = new TranslatorModel();
+            var viewModel = new TranslatorViewModel(model);
+            return viewModel;
         }
     }
 }

@@ -4,7 +4,7 @@
         Title="MainWindow" Height="350" Width="525">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="25*"/>
+            <RowDefinition Height="30"/>
             <RowDefinition Height="25*"/>
             <RowDefinition Height="25*"/>
             <RowDefinition Height="25*"/>
@@ -12,14 +12,22 @@
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal">
             <Label>From:</Label>
-            <ComboBox></ComboBox>
+            <ComboBox MinWidth="150" 
+                ItemsSource="{Binding Path=Languages}" 
+                DisplayMemberPath="Name" 
+                SelectedValuePath="Abbr" 
+                SelectedItem="{Binding Path=SelectedLanguageFrom}"></ComboBox>
             <Label>To:</Label>
-            <ComboBox></ComboBox>
+            <ComboBox MinWidth="150" ItemsSource="{Binding Path=Languages}" 
+                DisplayMemberPath="Name" 
+                SelectedValuePath="Abbr" 
+                SelectedItem="{Binding Path=SelectedLanguageTo}"></ComboBox>
         </StackPanel>
         <UniformGrid Grid.Row="1" Grid.RowSpan="2">
-            <TextBox>adsf</TextBox>
+            <TextBox TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Text="{Binding TextFrom}" />
+            <TextBox TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Text="{Binding TextTo}"/>
         </UniformGrid>
-        <Button Grid.Row="3">Translate</Button>
+        <Button Grid.Row="3" Command="{Binding TranslateCommand}">Translate</Button>
         
     </Grid>
 </Window>

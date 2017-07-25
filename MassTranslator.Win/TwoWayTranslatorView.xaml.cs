@@ -16,14 +16,16 @@ using System.Windows.Shapes;
 namespace MassTranslator.Win
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for TwoWayTranslatorView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class TwoWayTranslatorView : UserControl
     {
-        public MainWindow()
+        public TwoWayTranslatorView()
         {
             InitializeComponent();
+            var model = new TranslatorModel();
+            var viewModel = new TwoWayTranslatorViewModel(model);
+            this.DataContext = viewModel;
         }
-
     }
 }

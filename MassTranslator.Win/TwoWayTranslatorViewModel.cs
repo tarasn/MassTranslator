@@ -5,7 +5,24 @@ using System.Windows.Input;
 
 namespace MassTranslator.Win
 {
-    public class TranslatorViewModel : INotifyPropertyChanged
+    public class XmlTranslatorViewModel : INotifyPropertyChanged
+    {
+        private readonly TranslatorModel _model;
+        public event PropertyChangedEventHandler PropertyChanged = delegate { };
+
+        public XmlTranslatorViewModel(TranslatorModel model)
+        {
+            _model = model;
+        }
+
+        private void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
+    }
+
+
+    public class TwoWayTranslatorViewModel : INotifyPropertyChanged
     {
         private readonly TranslatorModel _model;
         private Language _selectedLanguageFrom;
@@ -14,7 +31,7 @@ namespace MassTranslator.Win
         private string _textTo;
         public event PropertyChangedEventHandler PropertyChanged = delegate {};
 
-        public TranslatorViewModel(TranslatorModel model)
+        public TwoWayTranslatorViewModel(TranslatorModel model)
         {
             _model = model;
             Languages = _model.LoadLanguages().ToList();

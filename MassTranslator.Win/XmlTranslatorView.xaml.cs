@@ -23,9 +23,7 @@ namespace MassTranslator.Win
         public XmlTranslatorView()
         {
             InitializeComponent();
-            var model = new TranslatorModel();
-            var viewModel = new XmlTranslatorViewModel(model);
-            this.DataContext = viewModel;
+            this.DataContext = ((App)Application.Current).ModelFactory.CreateXmlTranslatorViewModel();
         }
     }
 }

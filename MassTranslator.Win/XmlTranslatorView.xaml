@@ -23,15 +23,16 @@
                 ItemsSource="{Binding Path=Languages}" 
                 DisplayMemberPath="Name" 
                 SelectedValuePath="Abbr" 
-                SelectedItem="{Binding Path=SelectedLanguageFrom}"></ComboBox>
+                SelectedItem="{Binding SelectedLanguageFrom}"></ComboBox>
         </StackPanel>
-        <TextBox Grid.Row="1" Grid.ColumnSpan="2" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Text="{Binding TextFrom}" />
+        <TextBox Grid.Row="1" Grid.ColumnSpan="2" 
+                 TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Text="{Binding TextFrom}" />
         <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Orientation="Horizontal">
-            <TextBox MinWidth="300"></TextBox>
+            <TextBox MinWidth="300" Text="{Binding XmlFileName}" IsReadOnly="True"/>
             <TextBlock>
-                <Hyperlink NavigateUri="Reviews.xaml">Open XML</Hyperlink>
+                <Hyperlink Command="{Binding LoadXmlCommand}">Load XML</Hyperlink>
             </TextBlock>
         </StackPanel>
-        <Button Grid.Row="3" Grid.Column="1">Translate</Button>
+        <Button Grid.Row="3" Grid.Column="1" Command="{Binding TranslateCommand}">Translate</Button>
     </Grid>
 </UserControl>

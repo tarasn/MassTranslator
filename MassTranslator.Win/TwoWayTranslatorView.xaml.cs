@@ -23,9 +23,7 @@ namespace MassTranslator.Win
         public TwoWayTranslatorView()
         {
             InitializeComponent();
-            var model = new TranslatorModel();
-            var viewModel = new TwoWayTranslatorViewModel(model);
-            this.DataContext = viewModel;
+            this.DataContext = ((App)Application.Current).ModelFactory.CreateTwoWayTranslatorViewModel();
         }
     }
 }

@@ -5,23 +5,6 @@ using System.Windows.Input;
 
 namespace MassTranslator.Win
 {
-    public class XmlTranslatorViewModel : INotifyPropertyChanged
-    {
-        private readonly TranslatorModel _model;
-        public event PropertyChangedEventHandler PropertyChanged = delegate { };
-
-        public XmlTranslatorViewModel(TranslatorModel model)
-        {
-            _model = model;
-        }
-
-        private void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-        }
-    }
-
-
     public class TwoWayTranslatorViewModel : INotifyPropertyChanged
     {
         private readonly TranslatorModel _model;

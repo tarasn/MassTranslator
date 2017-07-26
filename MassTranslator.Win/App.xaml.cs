@@ -13,5 +13,11 @@ namespace MassTranslator.Win
     /// </summary>
     public partial class App : Application
     {
+        public ModelFactory ModelFactory { get; private set; }
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            ModelFactory = new ModelFactory();
+        }
     }
 }

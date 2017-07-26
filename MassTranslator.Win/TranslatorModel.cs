@@ -1,8 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Script.Serialization;
+using System.Xml.Linq;
 
 namespace MassTranslator.Win
 {
@@ -11,6 +15,9 @@ namespace MassTranslator.Win
 
         private const string GoogleTranslateUrlTemplate =
             "https://translate.googleapis.com/translate_a/single?client=gtx&sl={0}&tl={1}&dt=t&q={2}";
+
+
+        private ConcurrentDictionary<string,string> _translations = new ConcurrentDictionary<string, string>();
 
         public TranslatorModel()
         {
@@ -102,10 +109,49 @@ namespace MassTranslator.Win
                 {
                     var responseText = new StreamReader(responseStream).ReadToEnd();
                     var list = new JavaScriptSerializer().Deserialize<object[]>(responseText);
+                    //TODO: Doesn't work when in response few lines
                     return (string)((object[]) ((object[]) (list[0]))[0])[0];
                 }
             }
             return "";
+        }
+
+
+        public string Xml { get; set; }
+
+        public string TranslateXml(string from, string fromText)
+        {
+            _translations.Clear();
+            var languageAbbrs = ParseXmlTolanguageAbbrList();
+            Parallel.ForEach(languageAbbrs, (abbr) =>
+            {
+                _translations.TryAdd(abbr, Translate(from, abbr, fromText));
+            });
+
+            return BuildXml();
+        }
+
+        //TODO: XDocument can be loaded once 
+        private string BuildXml()
+        {
+            XDocument xDoc = XDocument.Parse(string.Format("<abbr>{0}</abbr>", Xml));
+            foreach (var node in xDoc.Root.Descendants())
+            {
+                var key = node.Name.LocalName.Substring(0, 2);
+                node.Value = HttpUtility.HtmlEncode(_translations[key]);
+            }
+            return xDoc.Root.ToString();
+        }
+
+        private IEnumerable<string> ParseXmlTolanguageAbbrList()
+        {
+            XDocument xDoc = XDocument.Parse(string.Format("<abbr>{0}</abbr>",Xml));
+            List<string> abbrs = new List<string>();
+            foreach (var node in xDoc.Root.Descendants())
+            {
+                abbrs.Add(node.Name.LocalName.Substring(0, 2));
+            }
+            return abbrs.Distinct();
         }
     }
 }

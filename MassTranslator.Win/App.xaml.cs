@@ -18,6 +18,12 @@ namespace MassTranslator.Win
         protected override void OnStartup(StartupEventArgs e)
         {
             ModelFactory = new ModelFactory();
+            ModelFactory.Model.Load();
+        }
+
+        protected override void OnExit(ExitEventArgs e)
+        {
+            ModelFactory.Model.Close();
         }
     }
 }

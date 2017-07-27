@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Script.Serialization;
+using System.Windows;
 using System.Xml.Linq;
+using MassTranslator.Win.Properties;
 
 namespace MassTranslator.Win
 {
@@ -18,6 +21,9 @@ namespace MassTranslator.Win
 
 
         private ConcurrentDictionary<string,string> _translations = new ConcurrentDictionary<string, string>();
+        private XDocument _xDoc;
+        private double _windowTop;
+
 
         public TranslatorModel()
         {
@@ -108,50 +114,86 @@ namespace MassTranslator.Win
                 using (var responseStream = response.GetResponseStream())
                 {
                     var responseText = new StreamReader(responseStream).ReadToEnd();
-                    var list = new JavaScriptSerializer().Deserialize<object[]>(responseText);
-                    //TODO: Doesn't work when in response few lines
-                    return (string)((object[]) ((object[]) (list[0]))[0])[0];
+                    object[] list = new JavaScriptSerializer().Deserialize<object[]>(responseText);
+                    var sb = new StringBuilder();
+                    object[] list1 = (object[])list[0];
+                    for (int i = 0; i < list1.Length; i++)
+                    {
+                        var line = ((object[]) list1[i])[0];
+                        sb.Append(line);
+                    }
+                    return sb.ToString();
                 }
             }
             return "";
         }
 
+        
 
         public string Xml { get; set; }
 
         public string TranslateXml(string from, string fromText)
         {
             _translations.Clear();
+            _xDoc = XDocument.Parse(string.Format("<abbr>{0}</abbr>", Xml));
             var languageAbbrs = ParseXmlTolanguageAbbrList();
             Parallel.ForEach(languageAbbrs, (abbr) =>
             {
                 _translations.TryAdd(abbr, Translate(from, abbr, fromText));
             });
-
             return BuildXml();
         }
 
-        //TODO: XDocument can be loaded once 
         private string BuildXml()
         {
-            XDocument xDoc = XDocument.Parse(string.Format("<abbr>{0}</abbr>", Xml));
-            foreach (var node in xDoc.Root.Descendants())
+            foreach (var node in _xDoc.Root.Descendants())
             {
                 var key = node.Name.LocalName.Substring(0, 2);
                 node.Value = HttpUtility.HtmlEncode(_translations[key]);
             }
-            return xDoc.Root.ToString();
+            return _xDoc.Root.ToString();
         }
 
         private IEnumerable<string> ParseXmlTolanguageAbbrList()
         {
-            XDocument xDoc = XDocument.Parse(string.Format("<abbr>{0}</abbr>",Xml));
             List<string> abbrs = new List<string>();
-            foreach (var node in xDoc.Root.Descendants())
+            foreach (var node in _xDoc.Root.Descendants())
             {
                 abbrs.Add(node.Name.LocalName.Substring(0, 2));
             }
             return abbrs.Distinct();
         }
+
+
+        public double WindowTop
+        {
+            get { return Settings.Default.Height; }
+            set
+            {
+                Settings.Default.Height = value;
+            }
+        }
+
+        public double WindowLeft
+        {
+            get { return Settings.Default.Width; }
+            set
+            {
+                Settings.Default.Width = value;
+            }
+        }
+
+        public void Load()
+        {
+            
+        }
+
+        public void Close()
+        {
+            Settings.Default.Save();
+        }
+
+
+
     }
 }

@@ -23,6 +23,7 @@ namespace MassTranslator.Win
         public MainWindow()
         {
             InitializeComponent();
+            this.DataContext = ((App)Application.Current).ModelFactory.CreateMainViewModel();
         }
 
     }

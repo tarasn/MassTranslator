@@ -1,13 +1,14 @@
 ﻿<Window x:Class="MassTranslator.Win.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Mass Translator" Height="350" Width="525">
-    <Window.DataContext>
-        <MainViewModel
-            xmlns="clr-namespace:MassTranslator.Win" />
-    </Window.DataContext>
+        xmlns:win="clr-namespace:MassTranslator.Win"
+        Title="Mass Translator" 
+        Height="{win:SettingBinding Height}"
+        Width="{win:SettingBinding Width}"
+        Left="{win:SettingBinding Left}"
+        Top="{win:SettingBinding Top}">
     <Grid>
-        <TabControl ItemsSource="{Binding Tabs}">
+        <TabControl ItemsSource="{Binding Tabs}" SelectedItem="{Binding SelectedTab}">
         </TabControl>
     </Grid>
 </Window>

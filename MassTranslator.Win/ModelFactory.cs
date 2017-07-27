@@ -6,7 +6,7 @@
 
         public MainViewModel CreateMainViewModel()
         {
-            return new MainViewModel();
+            return new MainViewModel(_model);
         }
 
         public TwoWayTranslatorViewModel CreateTwoWayTranslatorViewModel()
@@ -17,6 +17,11 @@
         public XmlTranslatorViewModel CreateXmlTranslatorViewModel()
         {
             return new XmlTranslatorViewModel(_model);
+        }
+
+        public TranslatorModel Model
+        {
+            get { return _model; }
         }
     }
 }

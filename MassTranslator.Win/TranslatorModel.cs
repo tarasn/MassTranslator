@@ -151,7 +151,7 @@ namespace MassTranslator.Win
                 var key = node.Name.LocalName.Substring(0, 2);
                 node.Value = HttpUtility.HtmlEncode(_translations[key]);
             }
-            return _xDoc.Root.ToString();
+            return string.Join("\n",_xDoc.Root.Nodes());
         }
 
         private IEnumerable<string> ParseXmlTolanguageAbbrList()

@@ -5,7 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="500">
-    
+    <UserControl.Resources>
+        <ImageBrush x:Key="AddButtonImageBrush" ImageSource="MassTranslator.Win;component/Resources/TwoSideArrow.png" Stretch="UniformToFill"/>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
@@ -31,6 +33,7 @@
                 DisplayMemberPath="Name" 
                 SelectedValuePath="Abbr" 
                 SelectedItem="{Binding Path=SelectedLanguageTo}"></ComboBox>
+            <Button  Command="{Binding SwapTranslationCommand}" Margin="30,0,0,0" HorizontalAlignment="Right">Swap</Button>
         </StackPanel>
         <TextBox Grid.Row="1" Grid.RowSpan="2" TextWrapping="Wrap" 
                  VerticalScrollBarVisibility="Auto" MaxLength="5000"

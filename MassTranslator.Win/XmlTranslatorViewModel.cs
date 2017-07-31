@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Windows;
 using System.Windows.Input;
 using Microsoft.Win32;
 
@@ -30,6 +31,9 @@ namespace MassTranslator.Win
         private void Translate(object obj)
         {
             var xml = _model.TranslateXml(SelectedLanguageFrom.Abbr, TextFrom);
+            var targetFilename = XmlFileName + ".translated";
+            MessageBox.Show(string.Format("Saved as '{0}'", targetFilename), "Saved");
+            File.WriteAllText(targetFilename,xml);
         }
 
         private void LoadXml(object obj)

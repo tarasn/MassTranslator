@@ -26,12 +26,12 @@
                 SelectedItem="{Binding SelectedLanguageFrom}"></ComboBox>
         </StackPanel>
         <TextBox Grid.Row="1" Grid.ColumnSpan="2" 
-                 TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" 
+                 TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" MaxLength="5000"
                  Text="{Binding TextFrom, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
         <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Orientation="Horizontal">
             <TextBox MinWidth="300" Text="{Binding XmlFileName}" IsReadOnly="True"/>
-            <TextBlock>
-                <Hyperlink Command="{Binding LoadXmlCommand}">Load XML</Hyperlink>
+            <TextBlock Margin="30,0,0,0">
+                <Hyperlink Command="{Binding LoadXmlCommand}" >Load XML</Hyperlink>
             </TextBlock>
         </StackPanel>
         <Button Grid.Row="3" Grid.Column="1" Command="{Binding TranslateCommand}">Translate</Button>

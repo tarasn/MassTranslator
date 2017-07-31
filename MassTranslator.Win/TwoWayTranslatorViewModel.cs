@@ -21,7 +21,16 @@ namespace MassTranslator.Win
             SelectedLanguageFrom = Languages.Find(l=>l.Name=="English");
             SelectedLanguageTo = Languages.Find(l=>l.Name=="Russian");
             TranslateCommand = new RelayCommand(c => !string.IsNullOrEmpty(TextFrom), Translate);
+            SwapTranslationCommand = new RelayCommand(c=>true,SwapTranslation);
         }
+
+        private void SwapTranslation(object obj)
+        {
+            var tmpLanguage = SelectedLanguageFrom;
+            SelectedLanguageFrom = SelectedLanguageTo;
+            SelectedLanguageTo = tmpLanguage;
+        }
+
 
         private void Translate(object obj)
         {
@@ -29,6 +38,7 @@ namespace MassTranslator.Win
         }
 
         public ICommand TranslateCommand { get; set; }
+        public ICommand SwapTranslationCommand { get; set; }
 
         public Language SelectedLanguageFrom
         {

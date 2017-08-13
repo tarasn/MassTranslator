@@ -10,25 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace MassTranslator.Win
 {
     /// <summary>
-    /// Interaction logic for XmlTranslatorView.xaml
+    /// Interaction logic for OutWindow.xaml
     /// </summary>
-    public partial class XmlTranslatorView : UserControl
+    public partial class OutWindow : Window
     {
-        public XmlTranslatorView()
+        public OutWindow()
         {
             InitializeComponent();
-            this.DataContext = ((App)Application.Current).ModelFactory.CreateXmlTranslatorViewModel();
-        }
-
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
+            this.DataContext = ((App)Application.Current).ModelFactory.CreateOutWindowViewModel();
         }
     }
 }

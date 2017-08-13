@@ -1,4 +1,5 @@
-﻿using System.Collections.Concurrent;
+﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Script.Serialization;
 using System.Windows;
+using System.Xml;
 using System.Xml.Linq;
 using MassTranslator.Win.Properties;
 
@@ -22,7 +24,6 @@ namespace MassTranslator.Win
 
         private ConcurrentDictionary<string,string> _translations = new ConcurrentDictionary<string, string>();
         private XDocument _xDoc;
-        private double _windowTop;
 
 
         public TranslatorModel()
@@ -131,9 +132,11 @@ namespace MassTranslator.Win
         
 
         public string Xml { get; set; }
+        public string OutputXml { get; set; }
 
-        public string TranslateXml(string from, string fromText)
+        public void TranslateXml(string from, string fromText)
         {
+            OutputXml = String.Empty;
             _translations.Clear();
             _xDoc = XDocument.Parse(string.Format("<abbr>{0}</abbr>", Xml));
             var languageAbbrs = ParseXmlTolanguageAbbrList();
@@ -141,7 +144,7 @@ namespace MassTranslator.Win
             {
                 _translations.TryAdd(abbr, Translate(from, abbr, fromText));
             });
-            return BuildXml();
+            OutputXml =  BuildXml();
         }
 
         private string BuildXml()
@@ -151,7 +154,7 @@ namespace MassTranslator.Win
                 var key = node.Name.LocalName.Substring(0, 2);
                 node.Value = HttpUtility.HtmlEncode(_translations[key]);
             }
-            return string.Join("\n",_xDoc.Root.Nodes());
+            return ToGogglePlayFormatedXml(_xDoc.Root.Descendants());
         }
 
         private IEnumerable<string> ParseXmlTolanguageAbbrList()
@@ -193,7 +196,15 @@ namespace MassTranslator.Win
             Settings.Default.Save();
         }
 
-
+        public string ToGogglePlayFormatedXml(IEnumerable<XElement> nodes)
+        {
+            var sb = new StringBuilder();
+            foreach (var node in nodes)
+            {
+                sb.AppendFormat("<{0}>\n{1}\n<{0}/>\n", node.Name, node.Value);
+            }
+            return sb.ToString();
+        }
 
     }
 }

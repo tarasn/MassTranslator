@@ -1,17 +1,18 @@
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
+using MassTranslator.Win.Properties;
 using Microsoft.Win32;
 
 namespace MassTranslator.Win
 {
-    public class XmlTranslatorViewModel : INotifyPropertyChanged
+    public class XmlTranslatorViewModel : ViewModelBase
     {
         private readonly TranslatorModel _model;
-        public event PropertyChangedEventHandler PropertyChanged = delegate { };
         private Language _selectedLanguageFrom;
         private string _textFrom;
         private string _xmlFileName;
@@ -26,14 +27,22 @@ namespace MassTranslator.Win
             TranslateCommand = new RelayCommand(c => !string.IsNullOrEmpty(TextFrom) && 
                 !string.IsNullOrEmpty(XmlFileName), Translate);
             LoadXmlCommand = new RelayCommand(c => !string.IsNullOrEmpty(TextFrom), LoadXml);
+            OpenOutputXmlCommand = new RelayCommand(c => !string.IsNullOrEmpty(_model.OutputXml), OpenOutputXml);
+        }
+
+        private void OpenOutputXml(object obj)
+        {
+            var outWindow = new OutWindow();
+            outWindow.Owner = Application.Current.MainWindow;
+            outWindow.ShowDialog();
         }
 
         private void Translate(object obj)
         {
-            var xml = _model.TranslateXml(SelectedLanguageFrom.Abbr, TextFrom);
+            _model.TranslateXml(SelectedLanguageFrom.Abbr, TextFrom);
             var targetFilename = XmlFileName + ".translated";
-            MessageBox.Show(string.Format("Saved as '{0}'", targetFilename), "Saved");
-            File.WriteAllText(targetFilename,xml);
+            //MessageBox.Show(string.Format("{0}", targetFilename), "Saved");
+            File.WriteAllText(targetFilename, _model.OutputXml);
         }
 
         private void LoadXml(object obj)
@@ -50,6 +59,7 @@ namespace MassTranslator.Win
 
         public ICommand TranslateCommand { get; set; }
         public ICommand LoadXmlCommand { get; set; }
+        public ICommand OpenOutputXmlCommand { get; set; }
 
         public string TextFrom
         {
@@ -96,10 +106,7 @@ namespace MassTranslator.Win
 
         public List<Language> Languages { get; private set; }
 
-        private void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-        }
+       
 
     }
 }

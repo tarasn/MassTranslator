@@ -10,13 +10,13 @@ using System.Windows.Controls;
 
 namespace MassTranslator.Win
 {
-    public class MainViewModel : INotifyPropertyChanged
+    public class Main : ViewModelBase
     {
         private readonly TranslatorModel _model;
         private TabItem _selectedTab;
         public List<TabItem> Tabs { get; set; }
 
-        public MainViewModel(TranslatorModel model)
+        public Main(TranslatorModel model)
         {
             _model = model;
             Tabs = new List<TabItem>();
@@ -50,11 +50,5 @@ namespace MassTranslator.Win
 
       
 
-        public event PropertyChangedEventHandler PropertyChanged = delegate {};
-
-        private void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-        }
     }
 }

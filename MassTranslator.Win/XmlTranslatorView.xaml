@@ -3,9 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             
              mc:Ignorable="d" 
              d:DesignHeight="400" d:DesignWidth="400">
-    <Grid>
+    <Grid ShowGridLines="False">
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
             <RowDefinition Height="25*"/>
@@ -28,12 +29,16 @@
         <TextBox Grid.Row="1" Grid.ColumnSpan="2" 
                  TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" MaxLength="5000"
                  Text="{Binding TextFrom, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-        <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Orientation="Horizontal">
-            <TextBox MinWidth="300" Text="{Binding XmlFileName}" IsReadOnly="True"/>
-            <TextBlock Margin="30,0,0,0">
-                <Hyperlink Command="{Binding LoadXmlCommand}" >Load XML</Hyperlink>
+        <DockPanel  Grid.Row="2" Grid.ColumnSpan="2">
+            <TextBlock Margin="10,0,10,0" DockPanel.Dock="Right" VerticalAlignment="Center">
+                <Hyperlink Command="{Binding LoadXmlCommand}">Load XML</Hyperlink>
             </TextBlock>
-        </StackPanel>
-        <Button Grid.Row="3" Grid.Column="1" Command="{Binding TranslateCommand}">Translate</Button>
+            <TextBox DockPanel.Dock="Left" MinWidth="300"
+                     Text="{Binding XmlFileName}" IsReadOnly="True" TextChanged="TextBox_TextChanged"/>
+        </DockPanel>
+        <TextBlock Margin="10,0,10,0" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Hyperlink Command="{Binding OpenOutputXmlCommand}">Open translated XML</Hyperlink>
+        </TextBlock>
+        <Button Grid.Row="3" Grid.Column="1" Width="100" Command="{Binding TranslateCommand}">Translate</Button>
     </Grid>
 </UserControl>

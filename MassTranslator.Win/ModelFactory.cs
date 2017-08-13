@@ -4,9 +4,9 @@
     {
         private readonly TranslatorModel _model = new TranslatorModel();
 
-        public MainViewModel CreateMainViewModel()
+        public Main CreateMainViewModel()
         {
-            return new MainViewModel(_model);
+            return new Main(_model);
         }
 
         public TwoWayTranslatorViewModel CreateTwoWayTranslatorViewModel()
@@ -22,6 +22,11 @@
         public TranslatorModel Model
         {
             get { return _model; }
+        }
+
+        public OutWindowViewModel CreateOutWindowViewModel()
+        {
+            return new OutWindowViewModel(_model);
         }
     }
 }

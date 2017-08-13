@@ -33,7 +33,7 @@
                 DisplayMemberPath="Name" 
                 SelectedValuePath="Abbr" 
                 SelectedItem="{Binding Path=SelectedLanguageTo}"></ComboBox>
-            <Button  Command="{Binding SwapTranslationCommand}" Margin="30,0,0,0" HorizontalAlignment="Right">Swap</Button>
+            <Button  Command="{Binding SwapTranslationCommand}" Margin="30,1,0,1" HorizontalAlignment="Right">Swap</Button>
         </StackPanel>
         <TextBox Grid.Row="1" Grid.RowSpan="2" TextWrapping="Wrap" 
                  VerticalScrollBarVisibility="Auto" MaxLength="5000"

@@ -1,18 +1,16 @@
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
 
 namespace MassTranslator.Win
 {
-    public class TwoWayTranslatorViewModel : INotifyPropertyChanged
+    public class TwoWayTranslatorViewModel : ViewModelBase
     {
         private readonly TranslatorModel _model;
         private Language _selectedLanguageFrom;
         private Language _selectedLanguageTo;
         private string _textFrom;
         private string _textTo;
-        public event PropertyChangedEventHandler PropertyChanged = delegate {};
 
         public TwoWayTranslatorViewModel(TranslatorModel model)
         {
@@ -94,10 +92,7 @@ namespace MassTranslator.Win
             }
         }
 
-        private void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-        }
+     
 
 
         public List<Language> Languages { get; private set; }

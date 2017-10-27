@@ -42,6 +42,7 @@
                  VerticalScrollBarVisibility="Auto" 
                  Text="{Binding TextTo}"/>
         <Button Grid.Row="3" Grid.Column="1" Command="{Binding TranslateCommand}">Translate</Button>
+        <Label Grid.Row="3" Grid.Column="0" Content="{Binding TextCount}"></Label>
         
     </Grid>
 </UserControl>

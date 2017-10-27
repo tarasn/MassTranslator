@@ -26,6 +26,7 @@
                 SelectedValuePath="Abbr" 
                 SelectedItem="{Binding SelectedLanguageFrom}"></ComboBox>
         </StackPanel>
+        <Label Grid.Row="0" Grid.Column="1" Content="{Binding TextCount}"></Label>
         <TextBox Grid.Row="1" Grid.ColumnSpan="2" 
                  TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" MaxLength="5000"
                  Text="{Binding TextFrom, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />

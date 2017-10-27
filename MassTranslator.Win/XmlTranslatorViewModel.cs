@@ -16,6 +16,7 @@ namespace MassTranslator.Win
         private Language _selectedLanguageFrom;
         private string _textFrom;
         private string _xmlFileName;
+        private string _textCount;
 
 
 
@@ -69,7 +70,21 @@ namespace MassTranslator.Win
                 if (_textFrom != value)
                 {
                     _textFrom = value;
+                    TextCount = "Text Count: " + TextFrom.Count();
                     OnPropertyChanged("TextFrom");
+                }
+            }
+        }
+
+        public string TextCount
+        {
+            get { return _textCount; }
+            set
+            {
+                if (_textCount != value)
+                {
+                    _textCount = value;
+                    OnPropertyChanged("TextCount");
                 }
             }
         }

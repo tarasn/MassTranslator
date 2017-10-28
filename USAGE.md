@@ -1,0 +1,1 @@
+Mass Translator can be used to translate specially formatted XML files.The XML file contains translated entries that will be shown to end user on Google Play Market . In addition - the app can  translate text from one language to another. Mass Translator uses google translation service.

@@ -11,6 +11,7 @@ namespace MassTranslator.Win
         private Language _selectedLanguageTo;
         private string _textFrom;
         private string _textTo;
+        private string _textCount;
 
         public TwoWayTranslatorViewModel(TranslatorModel model)
         {
@@ -73,6 +74,7 @@ namespace MassTranslator.Win
                 if (_textFrom != value)
                 {
                     _textFrom = value;
+                    TextCount = "Text Count: " + TextFrom.Count();
                     OnPropertyChanged("TextFrom");
                 }
             }
@@ -92,9 +94,21 @@ namespace MassTranslator.Win
             }
         }
 
-     
 
 
+        public string TextCount
+        {
+            get { return _textCount; }
+            set
+            {
+                if (_textCount != value)
+                {
+                    _textCount = value;
+                    OnPropertyChanged("TextCount");
+                }
+            }
+        }
+        
         public List<Language> Languages { get; private set; }
     }
 }

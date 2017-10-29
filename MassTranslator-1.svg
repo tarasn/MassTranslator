@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.1"
+   id="svg4136"
+   viewBox="0 0 512.00001 512.00001"
+   height="512"
+   width="512">
+  <defs
+     id="defs4138" />
+  <metadata
+     id="metadata4141">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     transform="translate(0,-540.36216)"
+     id="layer1">
+    <rect
+       y="540.36218"
+       x="0"
+       height="512"
+       width="512"
+       id="rect4692"
+       style="fill:#71bfcd;fill-opacity:1;stroke:none;stroke-width:6;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <flowRoot
+       transform="translate(-137.99946,2.0880687)"
+       style="font-style:normal;font-weight:normal;font-size:350.55609131px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ececec;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       id="flowRoot4706-1-1-5"
+       xml:space="preserve"><flowRegion
+         id="flowRegion4708-5-2-9"><rect
+           style="fill:#ececec"
+           y="-77.998505"
+           x="-10.517272"
+           height="4156.5933"
+           width="3155.0046"
+           id="rect4710-0-5-6" /></flowRegion><flowPara
+         id="flowPara4871">⇋⇆↔</flowPara></flowRoot>    <circle
+       r="235.68835"
+       cy="796.36218"
+       cx="256"
+       id="path4911"
+       style="opacity:1;fill:#98ffdc;fill-opacity:1;stroke:none;stroke-width:6;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <flowRoot
+       transform="matrix(1.4872711,0,0,1.4872711,53.216158,556.12724)"
+       style="font-style:normal;font-weight:normal;font-size:350.55609131px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;opacity:1;fill:#71bfcd;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       id="flowRoot4706-1-1-5-4"
+       xml:space="preserve"><flowRegion
+         id="flowRegion4708-5-2-9-2"><rect
+           style="fill:#71bfcd;fill-opacity:1"
+           y="-77.998505"
+           x="-10.517272"
+           height="4156.5933"
+           width="3155.0046"
+           id="rect4710-0-5-6-0" /></flowRegion><flowPara
+         id="flowPara4871-0">↔</flowPara></flowRoot>  </g>
+</svg>

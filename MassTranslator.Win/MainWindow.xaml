@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:win="clr-namespace:MassTranslator.Win"
         Title="Mass Translator" 
+        Icon="MassTranslator-2-128x128.ico"
         Height="{win:SettingBinding Height}"
         Width="{win:SettingBinding Width}"
         Left="{win:SettingBinding Left}"

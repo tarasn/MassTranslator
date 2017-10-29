@@ -35,7 +35,7 @@
                 SelectedItem="{Binding Path=SelectedLanguageTo}"></ComboBox>
             <Button  Command="{Binding SwapTranslationCommand}" Margin="30,1,0,1" HorizontalAlignment="Right">Swap</Button>
         </StackPanel>
-        <TextBox Grid.Row="1" Grid.RowSpan="2" AcceptsReturn="True" TextWrapping="Wrap" 
+        <TextBox Grid.Column="0"  Grid.Row="1" Grid.RowSpan="2" AcceptsReturn="True" TextWrapping="Wrap" 
                  VerticalScrollBarVisibility="Auto" MaxLength="5000"
                  Text="{Binding TextFrom, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
         <TextBox Grid.Row="1" Grid.RowSpan="2"  Grid.Column="1" TextWrapping="Wrap" AcceptsReturn="True"

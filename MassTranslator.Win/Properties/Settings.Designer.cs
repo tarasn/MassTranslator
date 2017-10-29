@@ -12,7 +12,7 @@ namespace MassTranslator.Win.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "12.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "14.0.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -68,6 +68,42 @@ namespace MassTranslator.Win.Properties {
             }
             set {
                 this["Top"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("English")]
+        public string TwoWaySelectedLanguageFrom {
+            get {
+                return ((string)(this["TwoWaySelectedLanguageFrom"]));
+            }
+            set {
+                this["TwoWaySelectedLanguageFrom"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Russian")]
+        public string TwoWaySelectedLanguageTo {
+            get {
+                return ((string)(this["TwoWaySelectedLanguageTo"]));
+            }
+            set {
+                this["TwoWaySelectedLanguageTo"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("English")]
+        public string XmlSelectedLanguageFrom {
+            get {
+                return ((string)(this["XmlSelectedLanguageFrom"]));
+            }
+            set {
+                this["XmlSelectedLanguageFrom"] = value;
             }
         }
     }

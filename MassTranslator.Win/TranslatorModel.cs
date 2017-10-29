@@ -186,6 +186,35 @@ namespace MassTranslator.Win
             }
         }
 
+
+        public string TwoWaySelectedLanguageFrom
+        {
+            get { return Settings.Default.TwoWaySelectedLanguageFrom; }
+            set
+            {
+                Settings.Default.TwoWaySelectedLanguageFrom = value;
+            }
+        }
+
+        public string TwoWaySelectedLanguageTo
+        {
+            get { return Settings.Default.TwoWaySelectedLanguageTo; }
+            set
+            {
+                Settings.Default.TwoWaySelectedLanguageTo = value;
+            }
+        }
+
+        public string XmlSelectedLanguageFrom
+        {
+            get { return Settings.Default.XmlSelectedLanguageFrom; }
+            set
+            {
+                Settings.Default.XmlSelectedLanguageFrom = value;
+            }
+        }
+
+
         public void Load()
         {
             

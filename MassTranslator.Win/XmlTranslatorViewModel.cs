@@ -24,7 +24,7 @@ namespace MassTranslator.Win
         {
             _model = model;
             Languages = _model.LoadLanguages().ToList();
-            SelectedLanguageFrom = Languages.Find(l => l.Name == "English");
+            SelectedLanguageFrom = Languages.Find(l => l.Name == model.XmlSelectedLanguageFrom);
             TranslateCommand = new RelayCommand(c => !string.IsNullOrEmpty(TextFrom) && 
                 !string.IsNullOrEmpty(XmlFileName), Translate);
             LoadXmlCommand = new RelayCommand(c => !string.IsNullOrEmpty(TextFrom), LoadXml);
@@ -114,6 +114,7 @@ namespace MassTranslator.Win
                 if (_selectedLanguageFrom != value)
                 {
                     _selectedLanguageFrom = value;
+                    _model.XmlSelectedLanguageFrom = value.Name;
                     OnPropertyChanged("SelectedLanguageFrom");
                 }
             }

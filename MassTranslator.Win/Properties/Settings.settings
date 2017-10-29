@@ -14,5 +14,14 @@
     <Setting Name="Top" Type="System.String" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
+    <Setting Name="TwoWaySelectedLanguageFrom" Type="System.String" Scope="User">
+      <Value Profile="(Default)">English</Value>
+    </Setting>
+    <Setting Name="TwoWaySelectedLanguageTo" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Russian</Value>
+    </Setting>
+    <Setting Name="XmlSelectedLanguageFrom" Type="System.String" Scope="User">
+      <Value Profile="(Default)">English</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

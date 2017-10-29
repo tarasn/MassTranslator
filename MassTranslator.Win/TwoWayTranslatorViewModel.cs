@@ -17,8 +17,8 @@ namespace MassTranslator.Win
         {
             _model = model;
             Languages = _model.LoadLanguages().ToList();
-            SelectedLanguageFrom = Languages.Find(l=>l.Name=="English");
-            SelectedLanguageTo = Languages.Find(l=>l.Name=="Russian");
+            SelectedLanguageFrom = Languages.Find(l=>l.Name==model.TwoWaySelectedLanguageFrom);
+            SelectedLanguageTo = Languages.Find(l=>l.Name==model.TwoWaySelectedLanguageTo);
             TranslateCommand = new RelayCommand(c => !string.IsNullOrEmpty(TextFrom), Translate);
             SwapTranslationCommand = new RelayCommand(c=>true,SwapTranslation);
         }
@@ -47,6 +47,7 @@ namespace MassTranslator.Win
                 if (_selectedLanguageFrom != value)
                 {
                     _selectedLanguageFrom = value;
+                    _model.TwoWaySelectedLanguageFrom = value.Name;
                     OnPropertyChanged("SelectedLanguageFrom");
                 }
             }
@@ -60,6 +61,7 @@ namespace MassTranslator.Win
                 if (_selectedLanguageTo != value)
                 {
                     _selectedLanguageTo = value;
+                    _model.TwoWaySelectedLanguageTo = value.Name;
                     OnPropertyChanged("SelectedLanguageTo");
                 }
             }

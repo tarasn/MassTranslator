@@ -39,6 +39,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml" />
@@ -65,6 +66,10 @@
       <DependentUpon>OutWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="OutWindowViewModel.cs" />
+    <Compile Include="ProgressDialogView.xaml.cs">
+      <DependentUpon>ProgressDialogView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ProgressDialogViewModel.cs" />
     <Compile Include="RelayCommand.cs" />
     <Compile Include="SettingBindingExtension.cs" />
     <Compile Include="TranslatorModel.cs" />
@@ -90,6 +95,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="OutWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ProgressDialogView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

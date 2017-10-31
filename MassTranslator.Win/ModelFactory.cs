@@ -1,4 +1,6 @@
-﻿namespace MassTranslator.Win
+﻿using System.Threading;
+
+namespace MassTranslator.Win
 {
     public class ModelFactory
     {
@@ -27,6 +29,11 @@
         public OutWindowViewModel CreateOutWindowViewModel()
         {
             return new OutWindowViewModel(_model);
+        }
+
+        public ProgressDialogViewModel CreateProgressDialogViewModel(CancellationTokenSource cts, string title, string text)
+        {
+            return new ProgressDialogViewModel(cts, title, text);
         }
     }
 }

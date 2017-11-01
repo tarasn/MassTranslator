@@ -1,8 +1,5 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
-using System.Windows;
 using System.Windows.Input;
 
 namespace MassTranslator.Win
@@ -33,26 +30,10 @@ namespace MassTranslator.Win
             SelectedLanguageTo = tmpLanguage;
         }
 
+
         private void Translate(object obj)
         {
-            var cts = new CancellationTokenSource();
-
-            // TODO: Consider moving view creation outside the view model.
-            var dialog = new ProgressDialogView(cts, "Translation status", "Translation ongoing...");
-            dialog.Loaded += async (object sender, RoutedEventArgs e) =>
-            {
-                try
-                {
-                    TextTo = await _model.Translate(SelectedLanguageFrom.Abbr, SelectedLanguageTo.Abbr, TextFrom, cts.Token);
-                    dialog.Close();
-                }
-                catch (OperationCanceledException)
-                {
-                    // Operation cancelled, no further action required.
-                }
-            };
-
-            dialog.ShowDialog();
+            TextTo = _model.Translate(SelectedLanguageFrom.Abbr, SelectedLanguageTo.Abbr, TextFrom);
         }
 
         public ICommand TranslateCommand { get; set; }

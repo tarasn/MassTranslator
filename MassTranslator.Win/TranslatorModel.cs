@@ -5,7 +5,6 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Script.Serialization;
@@ -13,7 +12,6 @@ using System.Windows;
 using System.Xml;
 using System.Xml.Linq;
 using MassTranslator.Win.Properties;
-using System.Net.Http;
 
 namespace MassTranslator.Win
 {
@@ -106,34 +104,28 @@ namespace MassTranslator.Win
             return languages;
         }
 
-        public async Task<string> Translate(string from, string to, string textFrom, CancellationToken token)
+        public string Translate(string from, string to, string textFrom)
         {
             var url = string.Format(GoogleTranslateUrlTemplate, from, to, HttpUtility.UrlEncode(textFrom));
-
-            using (var client = new HttpClient())
-            using (HttpResponseMessage response = 
-                await client.GetAsync(url, HttpCompletionOption.ResponseContentRead, token).ConfigureAwait(false))
+            var request = (HttpWebRequest)HttpWebRequest.Create(url);
+            request.Method = "GET";
+            var response = (HttpWebResponse)request.GetResponse();
+            if (response.StatusCode == HttpStatusCode.OK)
             {
-                if (response.StatusCode == HttpStatusCode.OK)
+                using (var responseStream = response.GetResponseStream())
                 {
-                    using (HttpContent content = response.Content)
+                    var responseText = new StreamReader(responseStream).ReadToEnd();
+                    object[] list = new JavaScriptSerializer().Deserialize<object[]>(responseText);
+                    var sb = new StringBuilder();
+                    object[] list1 = (object[])list[0];
+                    for (int i = 0; i < list1.Length; i++)
                     {
-                        var responseStr = await content.ReadAsStringAsync();
-
-                        object[] list = new JavaScriptSerializer().Deserialize<object[]>(responseStr);
-
-                        var sb = new StringBuilder();
-                        object[] list1 = (object[])list[0];
-                        for (int i = 0; i < list1.Length; i++)
-                        {
-                            var line = ((object[])list1[i])[0];
-                            sb.Append(line);
-                        }
-                        return sb.ToString();
+                        var line = ((object[]) list1[i])[0];
+                        sb.Append(line);
                     }
+                    return sb.ToString();
                 }
             }
-
             return "";
         }
 
@@ -144,14 +136,13 @@ namespace MassTranslator.Win
 
         public void TranslateXml(string from, string fromText)
         {
-            var token = new CancellationToken();
             OutputXml = String.Empty;
             _translations.Clear();
             _xDoc = XDocument.Parse(string.Format("<abbr>{0}</abbr>", Xml));
             var languageAbbrs = ParseXmlTolanguageAbbrList();
-            Parallel.ForEach(languageAbbrs, async (abbr) =>
+            Parallel.ForEach(languageAbbrs, (abbr) =>
             {
-                _translations.TryAdd(abbr, await Translate(from, abbr, fromText, token).ConfigureAwait(false));
+                _translations.TryAdd(abbr, Translate(from, abbr, fromText));
             });
             OutputXml =  BuildXml();
         }
